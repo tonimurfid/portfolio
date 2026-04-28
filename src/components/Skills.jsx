@@ -24,7 +24,7 @@ const SKILL_CATEGORIES = [
   {
     title: 'Platforms',
     color: 'border-pink/40 text-pink bg-pink/10 hover:shadow-[0_0_12px_rgba(255,121,198,0.3)]',
-    skills: ['Linux', 'Jupyter', 'Google Colab', 'VS Code'],
+    skills: ['Linux', 'Jupyter', 'Google Colab', 'VS Code', 'Nano'],
   },
 ]
 

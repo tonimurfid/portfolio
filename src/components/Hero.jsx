@@ -110,8 +110,8 @@ export default function Hero() {
         </div>
 
         <p className="text-comment max-w-lg mx-auto mb-8 text-sm md:text-base leading-relaxed">
-          AI Engineer passionate about building end-to-end machine learning systems —
-          from computer vision to LLM-powered RAG applications, deployed on cloud infrastructure.
+          Building production-ready ML systems — from Computer Vision to LLM-based RAG
+          applications, deployed on VPS and cloud infrastructure.
         </p>
 
         <div className="flex flex-wrap gap-4 justify-center mb-8">

@@ -29,12 +29,12 @@ export default function About() {
 
           <div className="flex-1 text-center md:text-left">
               <p className="text-foreground/90 leading-relaxed mb-6 text-sm md:text-base">
-                A final-year Informatics student at Universitas Brawijaya with over two years
-                of hands-on experience in AI engineering. I specialize in building
-                production-grade machine learning systems — from computer vision models
-                deployed on edge devices to LLM-powered RAG applications running on cloud
-                infrastructure. My work spans the full ML lifecycle: data pipeline design,
-                model training, MLOps, and API deployment.
+                AI Engineer specializing in production-ready ML systems, bridging research
+                and real-world deployment. Experienced in Computer Vision and LLM-based
+                applications, including RAG systems, cross-domain adaptation, and end-to-end
+                ML pipelines. Proven track record of deploying scalable AI services to VPS
+                and cloud environments, with measurable performance improvements across
+                research and industry projects.
               </p>
 
             <div className="grid grid-cols-3 gap-4">
