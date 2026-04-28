@@ -28,14 +28,14 @@ export default function About() {
           </div>
 
           <div className="flex-1 text-center md:text-left">
-            <p className="text-foreground/90 leading-relaxed mb-6 text-sm md:text-base">
-              A final-year Informatics student at Universitas Brawijaya with a 3.97 GPA
-              and over two years of hands-on experience in AI engineering. I specialize in
-              building production-grade machine learning systems — from computer vision
-              models deployed on edge devices to LLM-powered RAG applications running on
-              cloud infrastructure. My work spans the full ML lifecycle: data pipeline
-              design, model training, MLOps, and API deployment.
-            </p>
+              <p className="text-foreground/90 leading-relaxed mb-6 text-sm md:text-base">
+                A final-year Informatics student at Universitas Brawijaya with over two years
+                of hands-on experience in AI engineering. I specialize in building
+                production-grade machine learning systems — from computer vision models
+                deployed on edge devices to LLM-powered RAG applications running on cloud
+                infrastructure. My work spans the full ML lifecycle: data pipeline design,
+                model training, MLOps, and API deployment.
+              </p>
 
             <div className="grid grid-cols-3 gap-4">
               {STATS.map(({ value, label, color }) => (

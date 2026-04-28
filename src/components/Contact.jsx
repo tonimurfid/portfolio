@@ -24,8 +24,8 @@ export default function Contact() {
       <div className="flex flex-col md:flex-row gap-10">
         <div className="flex-1">
           {submitted ? (
-            <div className="bg-green/10 border border-green/30 rounded-xl p-8 text-center">
-              <svg className="mx-auto mb-4 text-green" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <div className="bg-green/10 border border-green/30 rounded-xl p-8 text-center" role="status">
+              <svg className="mx-auto mb-4 text-green" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
                 <path d="M22 4L12 14.01l-3-3" />
               </svg>
@@ -35,17 +35,19 @@ export default function Contact() {
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               {[
-                { label: 'Name', field: 'name', type: 'text' },
-                { label: 'Email', field: 'email', type: 'email' },
-                { label: 'Subject', field: 'subject', type: 'text' },
-              ].map(({ label, field, type }) => (
+                { label: 'Name', field: 'name', type: 'text', autocomplete: 'name' },
+                { label: 'Email', field: 'email', type: 'email', autocomplete: 'email' },
+                { label: 'Subject', field: 'subject', type: 'text', autocomplete: 'off' },
+              ].map(({ label, field, type, autocomplete }) => (
                 <div key={field}>
-                  <label className="block text-xs font-mono text-comment mb-1">{label}</label>
+                  <label htmlFor={`contact-${field}`} className="block text-xs font-mono text-comment mb-1">{label}</label>
                   <input
+                    id={`contact-${field}`}
                     type={type}
                     value={form[field]}
                     onChange={handleChange(field)}
                     required={field !== 'subject'}
+                    autoComplete={autocomplete}
                     className="w-full bg-surface border border-[#44475a] rounded-lg px-4 py-2.5 text-sm
                       text-foreground placeholder:text-comment/50 outline-none
                       focus:border-purple focus:shadow-[0_0_10px_rgba(189,147,249,0.2)]
@@ -55,8 +57,9 @@ export default function Contact() {
               ))}
 
               <div>
-                <label className="block text-xs font-mono text-comment mb-1">Message</label>
+                <label htmlFor="contact-message" className="block text-xs font-mono text-comment mb-1">Message</label>
                 <textarea
+                  id="contact-message"
                   value={form.message}
                   onChange={handleChange('message')}
                   required
@@ -119,7 +122,7 @@ export default function Contact() {
                     text-comment hover:text-purple hover:border-purple hover:shadow-[0_0_12px_rgba(189,147,249,0.3)]
                     transition-all duration-300"
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label={label}>
                     <path d={icon} />
                   </svg>
                 </a>

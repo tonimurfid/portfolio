@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-[#282a36] text-[#f8f8f2]">
+    <div id="main-content" role="main" className="min-h-screen bg-[#282a36] text-[#f8f8f2]">
       <Hero />
       <About />
       <Skills />

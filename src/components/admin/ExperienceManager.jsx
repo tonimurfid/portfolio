@@ -4,7 +4,8 @@ import CrudTable from './CrudTable'
 const FIELDS = [
   { key: 'company', label: 'Company' },
   { key: 'role', label: 'Role' },
-  { key: 'date', label: 'Date Range' },
+  { key: 'startDate', label: 'Start Date', type: 'month' },
+  { key: 'endDate', label: 'End Date', type: 'month', optional: true, hint: 'Leave empty if still present' },
   { key: 'location', label: 'Location' },
   { key: 'highlights', label: 'Highlights (one per line)', type: 'textarea' },
 ]
@@ -16,7 +17,8 @@ export default function ExperienceManager() {
     experiences.add({
       company: form.company,
       role: form.role,
-      date: form.date,
+      startDate: form.startDate || '',
+      endDate: form.endDate || '',
       location: form.location,
       highlights: form.highlights || [],
     })
@@ -26,7 +28,8 @@ export default function ExperienceManager() {
     experiences.update(id, {
       company: form.company,
       role: form.role,
-      date: form.date,
+      startDate: form.startDate || '',
+      endDate: form.endDate || '',
       location: form.location,
       highlights: form.highlights || [],
     })
@@ -41,6 +44,7 @@ export default function ExperienceManager() {
       onUpdate={handleUpdate}
       onRemove={experiences.remove}
       onReset={experiences.reset}
+      formatSubtitle={(item) => `${item.role} · ${item.date || ''} · ${item.location}`}
     />
   )
 }

@@ -145,7 +145,7 @@ export default function Hero() {
                 text-[#6272a4] hover:text-purple hover:border-purple hover:shadow-[0_0_12px_rgba(189,147,249,0.3)]
                 transition-all duration-300"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label={label}>
                 <path d={icon} />
               </svg>
             </a>
@@ -153,11 +153,11 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6272a4" strokeWidth="2">
-          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-        </svg>
-      </div>
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6272a4" strokeWidth="2">
+            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+          </svg>
+        </div>
     </section>
   )
 }

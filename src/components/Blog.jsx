@@ -53,9 +53,12 @@ export default function Blog() {
           {'>>> '}Subscribe for updates when posts go live
         </p>
         <div className="flex gap-2">
+          <label htmlFor="subscribe-email" className="sr-only">Email address</label>
           <input
+            id="subscribe-email"
             type="email"
             placeholder="your@email.com"
+            autoComplete="email"
             className="flex-1 bg-surface border border-[#44475a] rounded-lg px-4 py-2.5 text-sm font-mono
               text-foreground placeholder:text-comment/50 outline-none
               focus:border-purple focus:shadow-[0_0_10px_rgba(189,147,249,0.2)] transition-all duration-300"

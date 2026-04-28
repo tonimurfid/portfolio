@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRemove, onReset }) {
+export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRemove, onReset, formatSubtitle }) {
   const [editing, setEditing] = useState(null)
   const [form, setForm] = useState({})
 
@@ -27,6 +27,14 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
 
   const handleArrayField = (key, value) => {
     updateField(key, value.split('\n').filter(Boolean))
+  }
+
+  const subtitle = (item) => {
+    if (formatSubtitle) return formatSubtitle(item)
+    if (item.role) return item.role
+    if (item.date) return item.date
+    if (item.org) return item.org
+    return item.desc || ''
   }
 
   return (
@@ -60,7 +68,10 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
               if (f.type === 'textarea') {
                 return (
                   <div key={f.key} className="md:col-span-2">
-                    <label className="block text-xs font-mono text-comment mb-1">{f.label}</label>
+                    <label className="block text-xs font-mono text-comment mb-1">
+                      {f.label}
+                      {f.hint && <span className="text-comment/60 ml-1">({f.hint})</span>}
+                    </label>
                     <textarea
                       value={Array.isArray(form[f.key]) ? form[f.key].join('\n') : (form[f.key] || '')}
                       onChange={(e) => handleArrayField(f.key, e.target.value)}
@@ -71,9 +82,30 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
                   </div>
                 )
               }
+              if (f.type === 'month') {
+                return (
+                  <div key={f.key}>
+                    <label className="block text-xs font-mono text-comment mb-1">
+                      {f.label}
+                      {f.hint && <span className="text-comment/60 ml-1">({f.hint})</span>}
+                    </label>
+                    <input
+                      type="month"
+                      value={form[f.key] || ''}
+                      onChange={(e) => updateField(f.key, e.target.value)}
+                      className="w-full bg-[#282a36] border border-[#44475a] rounded-lg px-3 py-2 text-sm
+                        text-foreground outline-none focus:border-purple transition-all font-mono
+                        [color-scheme:dark]"
+                    />
+                  </div>
+                )
+              }
               return (
                 <div key={f.key}>
-                  <label className="block text-xs font-mono text-comment mb-1">{f.label}</label>
+                  <label className="block text-xs font-mono text-comment mb-1">
+                    {f.label}
+                    {f.hint && <span className="text-comment/60 ml-1">({f.hint})</span>}
+                  </label>
                   <input
                     type="text"
                     value={form[f.key] || ''}
@@ -104,7 +136,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
 
       <div className="space-y-3">
         {items.length === 0 && (
-          <p className="text-comment text-sm font-mono text-center py-8">No entries yet. Click "Add New" to create one.</p>
+          <p className="text-comment text-sm font-mono text-center py-8">No entries yet. Click &quot;Add New&quot; to create one.</p>
         )}
         {items.map((item) => (
           <div
@@ -113,9 +145,14 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
               hover:border-purple/20 transition-colors group"
           >
             <div className="flex-1 min-w-0">
-              <h4 className="font-mono font-bold text-foreground text-sm">{item.title || item.name || item.company || item.competition}</h4>
+              <h4 className="font-mono font-bold text-foreground text-sm">
+                {item.title || item.name || item.company || item.competition}
+                {item.startDate && (
+                  <span className="text-comment text-xs font-normal ml-2">{item.date}</span>
+                )}
+              </h4>
               <p className="text-comment text-xs mt-0.5 line-clamp-2">
-                {item.role || item.date || item.org || item.desc || ''}
+                {subtitle(item)}
               </p>
               {(item.tags || item.highlights) && (
                 <div className="flex flex-wrap gap-1 mt-2">
@@ -125,7 +162,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
                     </span>
                   ))}
                   {(item.highlights || []).slice(0, 2).map((h, i) => (
-                    <span key={i} className="text-[10px] text-comment/70 font-mono">• {h}</span>
+                    <span key={i} className="text-[10px] text-comment/70 font-mono">&bull; {h}</span>
                   ))}
                 </div>
               )}
