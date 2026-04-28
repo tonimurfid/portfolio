@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const ADMIN_PASSWORD = 'toni2026'
+const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD
 
 export default function AdminLogin({ onLogin }) {
   const [pass, setPass] = useState('')
