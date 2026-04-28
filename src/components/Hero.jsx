@@ -6,8 +6,7 @@ import Typed from 'typed.js'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 const ROLES = [
-  'AI Engineer',
-  'ML Systems Builder',
+  'AI/ML Engineer',
   'RAG &amp; LLM Specialist',
   'Computer Vision Engineer',
 ]
