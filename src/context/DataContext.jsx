@@ -27,12 +27,12 @@ const DEFAULT_EXPERIENCES = [
 ]
 
 const DEFAULT_COMPETITIONS = [
-  { id: '1', rank: '🥈 2nd Place', competition: 'Samsung Solve for Tomorrow', date: '2025', startDate: '2025-01', org: 'Samsung', role: 'Team Lead', color: 'text-yellow border-yellow/40 bg-yellow/10' },
-  { id: '2', rank: '🏅 Finalist', competition: 'Data Mining GEMASTIK XVII', date: '2025', startDate: '2025-01', org: 'Kemendikbud', role: 'ML Engineer', color: 'text-purple border-purple/40 bg-purple/10' },
-  { id: '3', rank: '🏅 Finalist', competition: 'Data Mining GEMASTIK XVII', date: '2024', startDate: '2024-01', org: 'Kemendikbud', role: 'ML Engineer', color: 'text-purple border-purple/40 bg-purple/10' },
+  { id: '1', rank: '🥈 2nd Place', competition: 'Samsung Solve for Tomorrow', date: '2025', startDate: '2025-01', org: 'Samsung', role: 'ML Engineer', color: 'text-yellow border-yellow/40 bg-yellow/10' },
+  { id: '2', rank: '🏅 Finalist', competition: 'Data Mining GEMASTIK XVII', date: '2025', startDate: '2025-01', org: 'Kemendikbud', role: 'ML Researcher', color: 'text-purple border-purple/40 bg-purple/10' },
+  { id: '3', rank: '🏅 Finalist', competition: 'Data Mining GEMASTIK XVII', date: '2024', startDate: '2024-01', org: 'Kemendikbud', role: 'ML Researcher', color: 'text-purple border-purple/40 bg-purple/10' },
   { id: '4', rank: '🏆 Top 3 Winner', competition: 'AI-Based Social Innovations', date: '2024', startDate: '2024-01', org: 'Yayasan BUMN & Microsoft IDN', role: 'AI Engineer', color: 'text-yellow border-yellow/40 bg-yellow/10' },
-  { id: '5', rank: '🥇 1st Place', competition: 'Hackathon elevAIte Indonesia Brawijaya Hub', date: '2024', startDate: '2024-01', org: 'elevAIte', role: 'Team Lead', color: 'text-green border-green/40 bg-green/10' },
-  { id: '6', rank: '4th Place', competition: 'Data Mining FIT Competition', date: '2025', startDate: '2025-01', org: 'FILKOM UB', role: 'ML Engineer', color: 'text-cyan border-cyan/40 bg-cyan/10' },
+  { id: '5', rank: '🥇 1st Place', competition: 'Hackathon elevAIte Indonesia Brawijaya Hub', date: '2024', startDate: '2024-01', org: 'elevAIte', role: 'ML Engineer', color: 'text-green border-green/40 bg-green/10' },
+  { id: '6', rank: '4th Place', competition: 'Data Mining FIT Competition', date: '2025', startDate: '2025-01', org: 'UKSW', role: 'ML Engineer', color: 'text-cyan border-cyan/40 bg-cyan/10' },
 ]
 
 function load() {
