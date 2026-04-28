@@ -1,9 +1,9 @@
 import Section from './Section'
 
 const STATS = [
-  { value: '3.97', label: 'GPA', color: 'text-green' },
+  { value: '6+', label: 'Competitions', color: 'text-yellow' },
   { value: '5+', label: 'Production Projects', color: 'text-cyan' },
-  { value: '2+', label: 'Years Experience', color: 'text-purple' },
+  { value: '4+', label: 'Research Projects', color: 'text-purple' },
 ]
 
 export default function About() {
