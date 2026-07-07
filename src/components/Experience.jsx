@@ -13,7 +13,7 @@ function TimelineCard({ exp, index, visible }) {
     >
       <div className={`flex-1 ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
         <div
-          className={`bg-surface/60 border border-[#44475a]/40 rounded-xl p-5 backdrop-blur-sm
+          className={`bg-surface/60 border border-surface/40 rounded-xl p-5 backdrop-blur-sm
             hover:border-purple/30 hover:shadow-[0_0_20px_rgba(189,147,249,0.15)]
             transition-all duration-500 ${
               visible ? 'opacity-100 translate-x-0' : isLeft ? 'opacity-0 -translate-x-10' : 'opacity-0 translate-x-10'
@@ -50,8 +50,8 @@ export default function Experience() {
   const [ref, visible] = useScrollReveal()
 
   return (
-    <Section id="experience" className="!bg-[#1e1f29] !max-w-none">
-      <div className="max-w-6xl mx-auto" ref={ref}>
+    <Section id="experience" fullWidth className="!bg-bg-darker">
+      <div ref={ref}>
         <h2 className="text-center mb-16">
           <span className="text-comment font-mono text-sm">{'// '}</span>
           <span className="text-cyan font-mono text-2xl font-bold">Work Experience</span>

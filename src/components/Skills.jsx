@@ -1,4 +1,5 @@
 import Section from './Section'
+import Reveal from './Reveal'
 
 const SKILL_CATEGORIES = [
   {
@@ -37,8 +38,8 @@ export default function Skills() {
       </h2>
 
       <div className="space-y-8">
-        {SKILL_CATEGORIES.map(({ title, color, skills }) => (
-          <div key={title}>
+        {SKILL_CATEGORIES.map(({ title, color, skills }, i) => (
+          <Reveal key={title} delay={i * 100}>
             <h3 className="text-sm font-mono text-comment mb-3">{title}</h3>
             <div className="flex flex-wrap gap-2">
               {skills.map((skill) => (
@@ -51,7 +52,7 @@ export default function Skills() {
                 </span>
               ))}
             </div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </Section>

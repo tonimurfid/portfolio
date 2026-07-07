@@ -17,8 +17,8 @@ export default function AdminLayout() {
     }`
 
   return (
-    <div className="min-h-screen bg-[#1e1f29] flex">
-      <aside className="w-56 bg-[#282a36] border-r border-[#44475a]/20 p-4 flex flex-col gap-1 flex-shrink-0">
+    <div className="min-h-screen bg-bg-darker flex">
+      <aside className="w-56 bg-bg border-r border-surface/20 p-4 flex flex-col gap-1 flex-shrink-0">
         <div className="mb-6 mt-2">
           <a href="/" className="font-mono text-xs tracking-tight">
             <span className="text-purple">from</span>
@@ -32,7 +32,7 @@ export default function AdminLayout() {
             {label}
           </NavLink>
         ))}
-        <div className="mt-auto pt-4 border-t border-[#44475a]/20">
+        <div className="mt-auto pt-4 border-t border-surface/20">
           <a href="/" className="block px-4 py-2 rounded-lg text-sm font-mono text-comment hover:text-cyan transition-colors">
             &larr; View Site
           </a>

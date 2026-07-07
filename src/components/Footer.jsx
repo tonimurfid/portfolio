@@ -25,7 +25,7 @@ export default function Footer() {
         </svg>
       </button>
 
-      <footer className="border-t border-[#44475a]/20 bg-[#1e1f29] py-8 px-4">
+      <footer className="border-t border-surface/20 bg-bg-darker py-8 px-4">
         <div className="max-w-6xl mx-auto text-center">
           <p className="font-mono text-xs text-comment">
             &copy; {new Date().getFullYear()} Fatoni Murfid Syaafii. Built with

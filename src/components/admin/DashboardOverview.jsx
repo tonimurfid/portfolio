@@ -21,7 +21,7 @@ export default function DashboardOverview() {
           <NavLink
             key={to}
             to={to}
-            className="bg-surface/30 border border-[#44475a]/20 rounded-xl p-5
+            className="bg-surface/30 border border-surface/20 rounded-xl p-5
               hover:border-purple/30 hover:shadow-[0_4px_20px_rgba(189,147,249,0.1)]
               transition-all duration-300 group"
           >

@@ -8,9 +8,8 @@ const STATS = [
 
 export default function About() {
   return (
-    <Section id="about" className="!bg-[#1e1f29] !max-w-none">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-center mb-12">
+    <Section id="about" fullWidth className="!bg-bg-darker">
+      <h2 className="text-center mb-12">
           <span className="text-comment font-mono text-sm">{'// '}</span>
           <span className="text-cyan font-mono text-2xl font-bold">About Me</span>
         </h2>
@@ -18,7 +17,7 @@ export default function About() {
         <div className="flex flex-col md:flex-row gap-10 items-center md:items-start">
           <div className="flex-shrink-0">
             {/* REPLACE WITH ACTUAL PHOTO */}
-            <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-[#44475a] border-2 border-purple/40 shadow-[0_0_30px_rgba(189,147,249,0.2)] overflow-hidden">
+            <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl bg-surface border-2 border-purple/40 shadow-[0_0_30px_rgba(189,147,249,0.2)] overflow-hidden">
               <img
                 src="/profile.jpeg"
                 alt="Fatoni Murfid Syaafii"
@@ -41,7 +40,7 @@ export default function About() {
               {STATS.map(({ value, label, color }) => (
                 <div
                   key={label}
-                  className="bg-surface/50 rounded-xl p-4 border border-[#44475a]/40
+                  className="bg-surface/50 rounded-xl p-4 border border-surface/40
                     hover:border-purple/40 hover:shadow-[0_0_15px_rgba(189,147,249,0.15)]
                     transition-all duration-300 text-center"
                 >
@@ -54,7 +53,6 @@ export default function About() {
             </div>
           </div>
         </div>
-      </div>
     </Section>
   )
 }

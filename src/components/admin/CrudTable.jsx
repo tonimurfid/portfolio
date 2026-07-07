@@ -50,7 +50,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
           </button>
           <button
             onClick={() => startEdit(null)}
-            className="px-3 py-1.5 rounded-lg text-xs font-mono bg-purple text-[#282a36] font-bold
+            className="px-3 py-1.5 rounded-lg text-xs font-mono bg-purple text-bg font-bold
               hover:shadow-[0_0_12px_rgba(189,147,249,0.3)] transition-all"
           >
             + Add New
@@ -76,7 +76,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
                       value={Array.isArray(form[f.key]) ? form[f.key].join('\n') : (form[f.key] || '')}
                       onChange={(e) => handleArrayField(f.key, e.target.value)}
                       rows={4}
-                      className="w-full bg-[#282a36] border border-[#44475a] rounded-lg px-3 py-2 text-sm
+                      className="w-full bg-bg border border-surface rounded-lg px-3 py-2 text-sm
                         text-foreground outline-none focus:border-purple transition-all font-mono resize-none"
                     />
                   </div>
@@ -93,7 +93,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
                       type="month"
                       value={form[f.key] || ''}
                       onChange={(e) => updateField(f.key, e.target.value)}
-                      className="w-full bg-[#282a36] border border-[#44475a] rounded-lg px-3 py-2 text-sm
+                      className="w-full bg-bg border border-surface rounded-lg px-3 py-2 text-sm
                         text-foreground outline-none focus:border-purple transition-all font-mono
                         [color-scheme:dark]"
                     />
@@ -110,7 +110,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
                     type="text"
                     value={form[f.key] || ''}
                     onChange={(e) => updateField(f.key, e.target.value)}
-                    className="w-full bg-[#282a36] border border-[#44475a] rounded-lg px-3 py-2 text-sm
+                    className="w-full bg-bg border border-surface rounded-lg px-3 py-2 text-sm
                       text-foreground outline-none focus:border-purple transition-all font-mono"
                   />
                 </div>
@@ -120,13 +120,13 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
           <div className="flex gap-2 mt-4">
             <button
               onClick={handleSave}
-              className="px-4 py-2 rounded-lg text-xs font-mono font-bold bg-green text-[#282a36] hover:shadow-[0_0_12px_rgba(80,250,123,0.3)] transition-all"
+              className="px-4 py-2 rounded-lg text-xs font-mono font-bold bg-green text-bg hover:shadow-[0_0_12px_rgba(80,250,123,0.3)] transition-all"
             >
               Save
             </button>
             <button
               onClick={cancelEdit}
-              className="px-4 py-2 rounded-lg text-xs font-mono border border-[#44475a] text-comment hover:text-foreground transition-colors"
+              className="px-4 py-2 rounded-lg text-xs font-mono border border-surface text-comment hover:text-foreground transition-colors"
             >
               Cancel
             </button>
@@ -141,7 +141,7 @@ export default function CrudTable({ title, items, fields, onAdd, onUpdate, onRem
         {items.map((item) => (
           <div
             key={item.id}
-            className="bg-surface/30 border border-[#44475a]/20 rounded-lg p-4 flex items-start justify-between gap-4
+            className="bg-surface/30 border border-surface/20 rounded-lg p-4 flex items-start justify-between gap-4
               hover:border-purple/20 transition-colors group"
           >
             <div className="flex-1 min-w-0">

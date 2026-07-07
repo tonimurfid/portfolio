@@ -17,7 +17,7 @@ export default function AdminLogin({ onLogin }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#1e1f29] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-bg-darker flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <div className="font-mono text-sm mb-2">
@@ -29,14 +29,14 @@ export default function AdminLogin({ onLogin }) {
           <h1 className="text-lg font-mono text-foreground font-bold">Admin Dashboard</h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-surface/40 border border-[#44475a]/30 rounded-xl p-6">
+        <form onSubmit={handleSubmit} className="bg-surface/40 border border-surface/30 rounded-xl p-6">
           <label className="block text-xs font-mono text-comment mb-2">Password</label>
           <input
             type="password"
             value={pass}
             onChange={(e) => { setPass(e.target.value); setError(false) }}
             autoFocus
-            className="w-full bg-[#282a36] border border-[#44475a] rounded-lg px-4 py-2.5 text-sm
+            className="w-full bg-bg border border-surface rounded-lg px-4 py-2.5 text-sm
               text-foreground outline-none focus:border-purple focus:shadow-[0_0_10px_rgba(189,147,249,0.2)]
               transition-all duration-300 font-mono"
           />
@@ -45,7 +45,7 @@ export default function AdminLogin({ onLogin }) {
           )}
           <button
             type="submit"
-            className="w-full mt-4 py-2.5 rounded-lg font-mono text-sm font-bold bg-purple text-[#282a36]
+            className="w-full mt-4 py-2.5 rounded-lg font-mono text-sm font-bold bg-purple text-bg
               hover:shadow-[0_0_20px_rgba(189,147,249,0.4)] transition-all duration-300"
           >
             Login

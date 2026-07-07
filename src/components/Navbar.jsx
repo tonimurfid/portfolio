@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const SECTIONS = ['About', 'Skills', 'Experience', 'Projects', 'Competitions', 'Blog', 'Contact']
+const SECTIONS = ['About', 'Education', 'Skills', 'Experience', 'Projects', 'Competitions', 'Blog', 'Contact']
 
 export default function Navbar() {
   const [active, setActive] = useState('')
@@ -43,7 +43,7 @@ export default function Navbar() {
     `text-sm font-mono tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
       active === id.toLowerCase()
         ? 'text-purple underline decoration-purple underline-offset-4'
-        : 'text-[#f8f8f2] hover:text-cyan'
+        : 'text-foreground hover:text-cyan'
     }`
 
   return (
@@ -52,7 +52,7 @@ export default function Navbar() {
       aria-label="Main navigation"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#282a36]/80 backdrop-blur-lg border-b border-[#44475a]/30 py-3'
+          ? 'bg-bg/80 backdrop-blur-lg border-b border-surface/30 py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -66,7 +66,7 @@ export default function Navbar() {
           <span className="text-cyan ml-1">toni</span>
           <span className="text-purple ml-1">import</span>
           <span className="text-green ml-1">portfolio</span>
-          <span className="text-[#f8f8f2] cursor-blink ml-0.5" aria-hidden="true">|</span>
+          <span className="text-foreground cursor-blink ml-0.5" aria-hidden="true">|</span>
         </a>
 
         <div className="hidden md:flex items-center gap-6" role="menubar">
@@ -84,7 +84,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-[#f8f8f2] p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
+          className="md:hidden text-foreground p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
@@ -101,7 +101,7 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-[#1e1f29]/95 backdrop-blur-lg border-t border-[#44475a]/30 px-4 py-4 flex flex-col gap-1" role="menu">
+        <div id="mobile-menu" className="md:hidden bg-bg-darker/95 backdrop-blur-lg border-t border-surface/30 px-4 py-4 flex flex-col gap-1" role="menu">
           {SECTIONS.map((s) => (
             <a
               key={s}

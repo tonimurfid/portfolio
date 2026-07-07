@@ -2,6 +2,10 @@ import { createContext, useContext, useState, useEffect, useCallback, useMemo } 
 
 const STORAGE_KEY = 'portfolio_admin_data'
 
+const DEFAULT_EDUCATION = [
+  { id: '1', school: 'Universitas Brawijaya', degree: 'Bachelor of Computer Science', major: 'Informatics Engineering', date: '2023 – Present', startDate: '2023-08', endDate: '', location: 'Malang, Indonesia', highlights: ['Focus on Artificial Intelligence and Machine Learning', 'Research assistant at Intelligent Systems Lab, FILKOM UB', 'Active in competitive programming and data science competitions'] },
+]
+
 const DEFAULT_BLOGS = [
   { id: '1', title: 'Building RAG Pipelines That Scale', content: 'Full article coming soon...', date: 'Coming Soon', tags: ['RAG', 'LLM', 'FastAPI'], slug: 'building-rag-pipelines' },
   { id: '2', title: 'Domain Adaptation for CV in the Wild', content: 'Full article coming soon...', date: 'Coming Soon', tags: ['CV', 'YOLO', 'PyTorch'], slug: 'domain-adaptation-cv' },
@@ -40,7 +44,7 @@ function load() {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) return JSON.parse(raw)
   } catch {}
-  return { blogs: DEFAULT_BLOGS, projects: DEFAULT_PROJECTS, experiences: DEFAULT_EXPERIENCES, competitions: DEFAULT_COMPETITIONS }
+  return { blogs: DEFAULT_BLOGS, projects: DEFAULT_PROJECTS, experiences: DEFAULT_EXPERIENCES, competitions: DEFAULT_COMPETITIONS, education: DEFAULT_EDUCATION }
 }
 
 function save(data) {
@@ -86,6 +90,7 @@ export function DataProvider({ children }) {
         projects: DEFAULT_PROJECTS,
         experiences: DEFAULT_EXPERIENCES,
         competitions: DEFAULT_COMPETITIONS,
+        education: DEFAULT_EDUCATION,
       }
       return { ...prev, [key]: defaults[key] || prev[key] }
     })
@@ -123,6 +128,7 @@ export function DataProvider({ children }) {
     projects: crud('projects'),
     experiences: crud('experiences', true),
     competitions: crud('competitions', true),
+    education: crud('education', true),
   }
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>
