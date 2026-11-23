@@ -1,70 +1,59 @@
-import { useData } from '../context/DataContext'
-import Section from './Section'
-import { useScrollReveal } from '../hooks/useScrollReveal'
-
-function TimelineCard({ exp, index, visible }) {
-  const isLeft = index % 2 === 0
-
-  return (
-    <div
-      className={`flex items-center w-full mb-8 md:mb-12 ${
-        isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
-      }`}
-    >
-      <div className={`flex-1 ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-        <div
-          className={`bg-surface/60 border border-surface/40 rounded-xl p-5 backdrop-blur-sm
-            hover:border-purple/30 hover:shadow-[0_0_20px_rgba(189,147,249,0.15)]
-            transition-all duration-500 ${
-              visible ? 'opacity-100 translate-x-0' : isLeft ? 'opacity-0 -translate-x-10' : 'opacity-0 translate-x-10'
-            }`}
-          style={{ transitionDelay: `${index * 100}ms` }}
-        >
-          <h3 className="text-cyan font-mono font-bold text-sm">{exp.company}</h3>
-          <p className="text-pink font-mono text-xs mt-0.5">{exp.role}</p>
-          <p className="text-comment text-xs mt-1">
-            {exp.date} &middot; {exp.location}
-          </p>
-          <ul className={`mt-3 space-y-1 text-xs leading-relaxed text-foreground/80 ${isLeft ? 'md:text-right' : ''}`}>
-            {(exp.highlights || []).map((h, i) => (
-              <li key={i} className={`flex gap-2 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                <span className="text-purple mt-0.5 flex-shrink-0">&gt;</span>
-                {h}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="hidden md:flex flex-col items-center flex-shrink-0">
-        <div className="w-3 h-3 rounded-full bg-purple shadow-[0_0_10px_rgba(189,147,249,0.6)]" />
-      </div>
-
-      <div className="hidden md:block flex-1" />
-    </div>
-  )
-}
+import { EXPERIENCES } from '../data/portfolio'
 
 export default function Experience() {
-  const { experiences } = useData()
-  const [ref, visible] = useScrollReveal()
-
   return (
-    <Section id="experience" fullWidth className="!bg-bg-darker">
-      <div ref={ref}>
-        <h2 className="text-center mb-16">
-          <span className="text-comment font-mono text-sm">{'// '}</span>
-          <span className="text-cyan font-mono text-2xl font-bold">Work Experience</span>
-        </h2>
+    <section id="experience" className="py-16 sm:py-24 bg-surface/55 border-y border-rule">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+        <div className="mb-10 sm:mb-12">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted mb-2.5">
+            02 / Experience
+          </p>
+          <h2 className="font-display text-3xl sm:text-5xl leading-[1.08] tracking-[-0.01em] text-ink">
+            Industry &amp; research track record.
+          </h2>
+        </div>
 
-        <div className="relative">
-          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 bg-gradient-to-b from-purple via-cyan to-purple/20" />
+        <div className="border-b border-rule">
+          {EXPERIENCES.map((exp) => (
+            <article
+              key={`${exp.company}-${exp.period}`}
+              className="border-t border-rule py-8 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-start"
+            >
+              <div className="md:col-span-4">
+                <p className="tabular-nums-mono text-xs uppercase tracking-wider text-ink">
+                  {exp.period}
+                </p>
+                <p className="text-xs text-muted mt-1">{exp.location}</p>
+                <h3 className="text-lg font-semibold tracking-tight text-ink mt-3">
+                  {exp.company}
+                </h3>
+                {exp.distinction && (
+                  <p className="mt-2 pl-2.5 border-l-2 border-accent font-mono text-[11px] text-accent font-medium">
+                    {exp.distinction}
+                  </p>
+                )}
+              </div>
 
-          {experiences.list.map((exp, i) => (
-            <TimelineCard key={exp.id} exp={exp} index={i} visible={visible} />
+              <div className="md:col-span-8">
+                <p className="text-base font-semibold text-ink mb-3">{exp.role}</p>
+                <ul className="space-y-2.5">
+                  {exp.highlights.map((point) => (
+                    <li
+                      key={point}
+                      className="flex gap-3 text-[15px] leading-[1.65] text-muted"
+                    >
+                      <span className="text-rule-strong select-none shrink-0" aria-hidden="true">
+                        —
+                      </span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
           ))}
         </div>
       </div>
-    </Section>
+    </section>
   )
 }

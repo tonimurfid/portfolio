@@ -1,101 +1,93 @@
-import { useEffect } from 'react'
-import Typed from 'typed.js'
-import { useScrollReveal } from '../hooks/useScrollReveal'
-import SocialIcons from './SocialIcons'
-
-const ROLES = [
-  'AI/ML Engineer',
-  'RAG &amp; LLM Specialist',
-  'Computer Vision Engineer',
-]
+import { HERO_METRICS, PROFILE } from '../data/portfolio'
 
 export default function Hero() {
-  const [ref, visible] = useScrollReveal()
-
-  useEffect(() => {
-    const typed = new Typed('#typed-role', {
-      strings: ROLES,
-      typeSpeed: 50,
-      backSpeed: 30,
-      backDelay: 1500,
-      startDelay: 300,
-      loop: true,
-      showCursor: true,
-      cursorChar: '|',
-    })
-    return () => typed.destroy()
-  }, [])
-
   return (
-    <section
-      id="home"
-      className="hero-bg relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      {/* Subtle grid overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: 'radial-gradient(circle, #bd93f9 1px, transparent 1px)',
-          backgroundSize: '40px 40px',
-        }}
-        aria-hidden="true"
-      />
+    <section id="top" className="pt-10 pb-16 sm:pt-14 sm:pb-24">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+          <div className="lg:col-span-8">
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted mb-5">
+              {PROFILE.role} · {PROFILE.location}
+            </p>
 
-      <div
-        ref={ref}
-        className={`relative z-10 text-center px-4 max-w-2xl mx-auto transition-all duration-1000 ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-        }`}
-      >
-        <div className="mb-6 inline-block">
-          {/* REPLACE WITH ACTUAL PHOTO */}
-          <div className="w-36 h-36 md:w-40 md:h-40 rounded-full mx-auto bg-surface border-[3px] border-purple shadow-[0_0_25px_rgba(189,147,249,0.3)] overflow-hidden">
-            <img
-              src="/profile.jpeg"
-              alt="Fatoni Murfid Syaafii"
-              className="w-full h-full object-cover"
-            />
+            <h1 className="font-display text-[2.75rem] sm:text-[3.75rem] lg:text-[4.35rem] leading-[1.03] tracking-[-0.015em] text-ink mb-6">
+              {PROFILE.headlineLead}{' '}
+              <span className="italic text-accent">{PROFILE.headlineItalic}</span>
+            </h1>
+
+            <p className="text-base sm:text-[17px] leading-[1.68] text-muted max-w-2xl mb-8">
+              {PROFILE.summary}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              <a
+                href="#contact"
+                className="px-5 py-2.5 bg-ink text-paper text-sm font-medium hover:bg-accent transition-colors"
+              >
+                Get in Touch
+              </a>
+
+              <a
+                href={PROFILE.cvUrl}
+                download
+                className="px-5 py-2.5 border border-rule-strong text-ink text-sm font-medium hover:border-ink transition-colors"
+              >
+                Download CV
+              </a>
+
+              <div className="flex items-center gap-5 sm:ml-3 pt-1 sm:pt-0 text-sm font-mono text-muted">
+                <a
+                  href={PROFILE.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-ink underline underline-offset-4 decoration-rule-strong hover:decoration-ink transition-colors"
+                >
+                  GitHub ↗
+                </a>
+                <a
+                  href={PROFILE.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-ink underline underline-offset-4 decoration-rule-strong hover:decoration-ink transition-colors"
+                >
+                  LinkedIn ↗
+                </a>
+              </div>
+            </div>
           </div>
+
+          <figure className="lg:col-span-4 max-w-[260px] lg:max-w-none w-full">
+            <div className="aspect-[4/5] w-full overflow-hidden border border-rule bg-surface">
+              <img
+                src={PROFILE.photoUrl}
+                alt={PROFILE.name}
+                width="640"
+                height="800"
+                fetchPriority="high"
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+            <figcaption className="mt-3 font-mono text-[11px] leading-relaxed text-muted">
+              {PROFILE.photoCaption}
+            </figcaption>
+          </figure>
         </div>
 
-        <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold font-mono mb-4 text-foreground">
-          Fatoni Murfid Syaafii
-        </h1>
-
-        <div className="text-xl md:text-2xl font-mono text-cyan mb-4 h-10">
-          <span id="typed-role"></span>
-        </div>
-
-        <p className="text-comment max-w-lg mx-auto mb-8 text-sm md:text-base leading-relaxed">
-          Building production-ready ML systems — from Computer Vision to LLM-based RAG
-          applications, deployed on VPS and cloud infrastructure.
-        </p>
-
-        <div className="flex flex-wrap gap-4 justify-center mb-8">
-          <a
-            href="/cv.pdf"
-            download
-            className="px-6 py-2.5 font-mono text-sm rounded-lg border border-purple text-purple bg-purple/10
-              hover:bg-purple/20 hover:shadow-[0_0_20px_rgba(189,147,249,0.3)] transition-all duration-300"
-          >
-            Download CV
-          </a>
-          <a
-            href="#contact"
-            className="px-6 py-2.5 font-mono text-sm rounded-lg bg-cyan text-bg
-              hover:shadow-[0_0_20px_rgba(139,233,253,0.4)] transition-all duration-300 hover:scale-105"
-          >
-            Let&apos;s Connect
-          </a>
-        </div>
-
-        <SocialIcons />
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="text-comment" strokeWidth="2">
-          <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
-        </svg>
+        <dl className="mt-14 sm:mt-16 border-y border-rule grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-rule">
+          {HERO_METRICS.map((item, idx) => (
+            <div
+              key={item.label}
+              className={`py-6 ${idx % 2 === 0 ? 'pr-4' : 'pl-4 sm:pl-6'} lg:px-6 lg:first:pl-0 lg:last:pr-0`}
+            >
+              <dt className="sr-only">{item.label}</dt>
+              <dd className="tabular-nums-mono text-2xl sm:text-[1.7rem] font-medium tracking-tight text-ink">
+                {item.value}
+              </dd>
+              <p className="mt-1.5 text-sm font-medium text-ink">{item.label}</p>
+              <p className="mt-0.5 font-mono text-[11px] text-muted">{item.context}</p>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   )

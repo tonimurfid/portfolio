@@ -1,6 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { PROFILE } from '../data/portfolio'
 
-const SECTIONS = ['About', 'Education', 'Skills', 'Experience', 'Projects', 'Competitions', 'Blog', 'Contact']
+const NAV_ITEMS = [
+  { id: 'work', label: 'Work' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'research', label: 'Research' },
+  { id: 'awards', label: 'Awards' },
+  { id: 'contact', label: 'Contact' },
+]
 
 export default function Navbar() {
   const [active, setActive] = useState('')
@@ -8,113 +15,159 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    const elements = SECTIONS.map(id => document.getElementById(id.toLowerCase())).filter(Boolean)
-    if (elements.length === 0) return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.find(e => e.isIntersecting)
-        if (visible) {
-          setActive(visible.target.id)
-        }
-      },
-      { rootMargin: '-40% 0px -55% 0px' }
-    )
-    elements.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === 'Escape' && menuOpen) {
-        setMenuOpen(false)
+    const updateActive = () => {
+      if (window.scrollY < 140) {
+        setActive('')
+        return
       }
+
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 48
+      if (nearBottom) {
+        setActive('contact')
+        return
+      }
+
+      let current = ''
+      for (const { id } of NAV_ITEMS) {
+        const el = document.getElementById(id)
+        if (!el) continue
+        if (el.getBoundingClientRect().top <= 160) {
+          current = id
+        }
+      }
+      setActive(current)
     }
-    document.addEventListener('keydown', handleKey)
-    return () => document.removeEventListener('keydown', handleKey)
+
+    updateActive()
+    window.addEventListener('scroll', updateActive, { passive: true })
+    window.addEventListener('resize', updateActive, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', updateActive)
+      window.removeEventListener('resize', updateActive)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
   }, [menuOpen])
 
-  const linkClass = (id) =>
-    `text-sm font-mono tracking-wide transition-colors duration-300 min-h-[44px] flex items-center ${
-      active === id.toLowerCase()
-        ? 'text-purple underline decoration-purple underline-offset-4'
-        : 'text-foreground hover:text-cyan'
-    }`
-
   return (
-    <nav
-      role="navigation"
-      aria-label="Main navigation"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-200 ${
         scrolled
-          ? 'bg-bg/80 backdrop-blur-lg border-b border-surface/30 py-3'
-          : 'bg-transparent py-5'
+          ? 'bg-paper/92 backdrop-blur-md border-b border-rule'
+          : 'bg-paper border-b border-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto px-4 md:px-8 flex items-center justify-between">
+      <nav
+        aria-label="Primary navigation"
+        className="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between gap-6"
+      >
         <a
-          href="#"
-          className="font-mono text-sm md:text-base tracking-tight flex items-baseline gap-0"
-          aria-label="Fatoni Murfid Syaafii — home"
+          href="#top"
+          className="inline-flex items-baseline gap-2.5 text-ink hover:text-accent transition-colors shrink-0"
         >
-          <span className="text-purple">from</span>
-          <span className="text-cyan ml-1">toni</span>
-          <span className="text-purple ml-1">import</span>
-          <span className="text-green ml-1">portfolio</span>
-          <span className="text-foreground cursor-blink ml-0.5" aria-hidden="true">|</span>
+          <span className="font-display text-xl sm:text-2xl tracking-tight leading-none whitespace-nowrap">
+            {PROFILE.name}
+          </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-6" role="menubar">
-          {SECTIONS.map((s) => (
-            <a
-              key={s}
-              href={`#${s.toLowerCase()}`}
-              className={linkClass(s)}
-              role="menuitem"
-              aria-current={active === s.toLowerCase() ? 'true' : undefined}
-            >
-              {s}
-            </a>
-          ))}
+        <div className="hidden md:flex items-center gap-7">
+          {NAV_ITEMS.map(({ id, label }) => {
+            const isActive = active === id
+            return (
+              <a
+                key={id}
+                href={`#${id}`}
+                aria-current={isActive ? 'true' : undefined}
+                className={`text-sm transition-colors py-1 ${
+                  isActive
+                    ? 'text-ink font-medium underline underline-offset-8 decoration-accent decoration-2'
+                    : 'text-muted hover:text-ink'
+                }`}
+              >
+                {label}
+              </a>
+            )
+          })}
+
+          <a
+            href={PROFILE.cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-2 px-3.5 py-1.5 text-xs font-mono uppercase tracking-wider border border-rule-strong text-ink hover:border-ink hover:bg-ink hover:text-paper transition-colors"
+          >
+            CV ↗
+          </a>
         </div>
 
         <button
-          className="md:hidden text-foreground p-3 min-w-[44px] min-h-[44px] flex items-center justify-center"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          type="button"
+          className="md:hidden p-2 -mr-2 text-ink min-w-[44px] min-h-[44px] inline-flex items-center justify-center"
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
           aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
+          aria-controls="mobile-nav-drawer"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            aria-hidden="true"
+          >
             {menuOpen ? (
               <path d="M18 6L6 18M6 6l12 12" />
             ) : (
-              <path d="M3 12h18M3 6h18M3 18h18" />
+              <path d="M4 8h16M4 16h16" />
             )}
           </svg>
         </button>
-      </div>
+      </nav>
 
       {menuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-bg-darker/95 backdrop-blur-lg border-t border-surface/30 px-4 py-4 flex flex-col gap-1" role="menu">
-          {SECTIONS.map((s) => (
+        <div
+          id="mobile-nav-drawer"
+          className="md:hidden bg-paper border-b border-rule px-5 sm:px-8 py-4 flex flex-col gap-1"
+        >
+          {NAV_ITEMS.map(({ id, label }) => (
             <a
-              key={s}
-              href={`#${s.toLowerCase()}`}
-              className={linkClass(s)}
-              role="menuitem"
+              key={id}
+              href={`#${id}`}
               onClick={() => setMenuOpen(false)}
+              className={`py-2.5 text-sm border-b border-rule/60 last:border-b-0 ${
+                active === id ? 'text-ink font-semibold' : 'text-muted'
+              }`}
             >
-              {s}
+              {label}
             </a>
           ))}
+          <a
+            href={PROFILE.cvUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+            className="mt-3 py-2.5 text-center text-xs font-mono uppercase tracking-wider border border-ink text-ink"
+          >
+            Download CV ↗
+          </a>
         </div>
       )}
-    </nav>
+    </header>
   )
 }

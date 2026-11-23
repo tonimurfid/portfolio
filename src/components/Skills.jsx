@@ -1,60 +1,34 @@
-import Section from './Section'
-import Reveal from './Reveal'
-
-const SKILL_CATEGORIES = [
-  {
-    title: 'Programming Languages',
-    color: 'border-orange/40 text-orange bg-orange/10 hover:shadow-[0_0_12px_rgba(255,184,108,0.3)]',
-    skills: ['Python', 'SQL', 'Java'],
-  },
-  {
-    title: 'AI / ML',
-    color: 'border-cyan/40 text-cyan bg-cyan/10 hover:shadow-[0_0_12px_rgba(139,233,253,0.3)]',
-    skills: ['PyTorch', 'TensorFlow', 'Scikit-learn', 'HuggingFace'],
-  },
-  {
-    title: 'MLOps & Deployment',
-    color: 'border-green/40 text-green bg-green/10 hover:shadow-[0_0_12px_rgba(80,250,123,0.3)]',
-    skills: ['Docker', 'MLflow', 'W&B', 'FastAPI', 'Azure', 'Git'],
-  },
-  {
-    title: 'Data & Databases',
-    color: 'border-purple/40 text-purple bg-purple/10 hover:shadow-[0_0_12px_rgba(189,147,249,0.3)]',
-    skills: ['MongoDB', 'PostgreSQL', 'ChromaDB'],
-  },
-  {
-    title: 'Platforms',
-    color: 'border-pink/40 text-pink bg-pink/10 hover:shadow-[0_0_12px_rgba(255,121,198,0.3)]',
-    skills: ['Linux', 'Jupyter', 'Google Colab', 'VS Code', 'Nano'],
-  },
-]
+import { SKILL_GROUPS } from '../data/portfolio'
 
 export default function Skills() {
   return (
-    <Section id="skills">
-      <h2 className="text-center mb-12">
-        <span className="text-comment font-mono text-sm">{'// '}</span>
-        <span className="text-cyan font-mono text-2xl font-bold">Technical Skills</span>
-      </h2>
+    <section id="skills" className="py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto px-5 sm:px-8">
+        <div className="mb-10 sm:mb-12">
+          <p className="font-mono text-xs uppercase tracking-[0.14em] text-muted mb-2.5">
+            05 / Technical Stack
+          </p>
+          <h2 className="font-display text-3xl sm:text-5xl leading-[1.08] tracking-[-0.01em] text-ink">
+            Tools &amp; infrastructure.
+          </h2>
+        </div>
 
-      <div className="space-y-8">
-        {SKILL_CATEGORIES.map(({ title, color, skills }, i) => (
-          <Reveal key={title} delay={i * 100}>
-            <h3 className="text-sm font-mono text-comment mb-3">{title}</h3>
-            <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
-                <span
-                  key={skill}
-                  className={`px-3 py-1.5 rounded-full text-xs font-mono border transition-all duration-300
-                    hover:scale-110 cursor-default ${color}`}
-                >
-                  {skill}
-                </span>
-              ))}
+        <dl className="border-y border-rule divide-y divide-rule">
+          {SKILL_GROUPS.map((group) => (
+            <div
+              key={group.category}
+              className="py-5 grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-8 items-baseline"
+            >
+              <dt className="md:col-span-4 font-mono text-xs uppercase tracking-[0.1em] text-muted">
+                {group.category}
+              </dt>
+              <dd className="md:col-span-8 text-[15px] sm:text-base text-ink leading-relaxed">
+                {group.items.join(' · ')}
+              </dd>
             </div>
-          </Reveal>
-        ))}
+          ))}
+        </dl>
       </div>
-    </Section>
+    </section>
   )
 }
